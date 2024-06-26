@@ -10,11 +10,12 @@ st.set_page_config(
     page_title="Geometry Summary Statistics - Latest Release",
     layout="wide"
 )
-
+filter_list = ["US", "Rest of World", "Grand Total"]
 latest_release_df = (
     read_from_gsheets("Global Places")
     [["Country", "Total POI with Parking Lots", "POI with polygons", "Point-only POI", "Polygon coverage"]]
     .tail(7)
+    .query('Country  == @filter_list')
     .assign(
         **{
             "Total POI with Parking Lots": lambda df: df["Total POI with Parking Lots"].str.replace(",", "").astype(float),
