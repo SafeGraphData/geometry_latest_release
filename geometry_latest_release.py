@@ -10,11 +10,11 @@ st.set_page_config(
     page_title="Geometry Summary Statistics - Latest Release",
     layout="wide"
 )
-filter_list = ["US", "Rest of World", "Grand Total"]
+filter_list = ["US", "Excluding US", "Grand Total"]
 latest_release_df = (
     read_from_gsheets("Global Places")
     [["Country", "Total POI with Parking Lots", "POI with polygons", "Point-only POI", "Polygon coverage"]]
-    .tail(7)
+    .tail(8)
     .query('Country  == @filter_list')
     .assign(
         **{
@@ -26,6 +26,7 @@ latest_release_df = (
     )
     .reset_index(drop=True)
 )
+latest_release_df.loc[latest_release_df.Country == "Excluding US", 'Country'] = 'Rest of World'
 
 latest_release_df_styled = (
     latest_release_df.style
