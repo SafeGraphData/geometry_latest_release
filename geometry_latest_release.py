@@ -19,7 +19,7 @@ latest_release_df = (
     .assign(
         **{
             "Total POI with Parking Lots": lambda df: df["Total POI with Parking Lots"].str.replace(",", "").astype(float),
-            "POI with polygons": lambda df: df["POI with polygons"].str.replace(",", "").astype(int),
+            "POI with polygons incl. Parking Lots": lambda df: df["POI with polygons with Parking Lots"].str.replace(",", "").astype(int),
             "Point-only POI": lambda df: df["Point-only POI"].str.replace(",", "").astype(int),
             "Polygon coverage": lambda df: ((df["Polygon coverage"].str.replace(",", "").astype(float)) * 100).astype(float)
         }
@@ -33,7 +33,7 @@ latest_release_df_styled = (
     .apply(lambda x: ['background-color: #D7E8ED' if i%2==0 else '' for i in range(len(x))], axis=0)
     .format({
         "Total POI with Parking Lots": "{:,.0f}",
-        "POI with polygons": "{:,.0f}",
+        "POI with polygons incl. Parking Lots": "{:,.0f}",
         "Point-only POI": "{:,.0f}",
         "Polygon coverage": "{:.01f}%"
     })
