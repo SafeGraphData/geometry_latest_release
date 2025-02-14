@@ -27,6 +27,16 @@ latest_release_df = (
     .drop(['POI with polygons with Parking Lots'], axis=1)
     .reset_index(drop=True)
 )
+
+column_order = [
+    "Country",
+    "Total POI with Parking Lots",
+    "POI with polygons incl. Parking Lots",
+    "Point-only POI",
+    "Polygon coverage"
+]
+
+latest_release_df = latest_release_df[column_order]
 latest_release_df.loc[latest_release_df.Country == "Excluding US", 'Country'] = 'Rest of World'
 
 latest_release_df_styled = (
