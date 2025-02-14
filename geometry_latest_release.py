@@ -24,6 +24,7 @@ latest_release_df = (
             "Polygon coverage": lambda df: ((df["Polygon coverage"].str.replace(",", "").astype(float)) * 100).astype(float)
         }
     )
+    .drop(['POI with polygons with Parking Lots'], axis=1)
     .reset_index(drop=True)
 )
 latest_release_df.loc[latest_release_df.Country == "Excluding US", 'Country'] = 'Rest of World'
