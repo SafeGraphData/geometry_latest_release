@@ -13,7 +13,7 @@ st.set_page_config(
 filter_list = ["US", "Excluding US", "Grand Total"]
 latest_release_df = (
     read_from_gsheets("Global Places")
-    [["Country", "Total POI with Parking Lots", "POI with polygons", "Point-only POI", "Polygon coverage"]]
+    [["Country", "Total POI with Parking Lots", "POI with polygons", "Point-only POI", "Polygon coverage", "POI with polygons incl. Parking Lots"]]
     .tail(8)
     .query('Country  == @filter_list')
     .assign(
